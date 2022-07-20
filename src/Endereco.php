@@ -1,7 +1,12 @@
 <?php
 
+
+    require_once 'AcessoAtributos.php';
+
+
     class Endereco
     {
+        use AcessoAtributos; //nome da minha trait
         private string $uf;
         private string $cidade;
         private string $nomeLogradouro;
