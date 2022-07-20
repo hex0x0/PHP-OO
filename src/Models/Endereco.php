@@ -1,6 +1,6 @@
 <?php
 
-
+    namespace Lucas\Comercial\Models;
     require_once 'AcessoAtributos.php';
 
 

@@ -1,5 +1,6 @@
 <?php
 
+    namespace Lucas\Comercial\Models;
     class Cliente extends Pessoa
     {
 

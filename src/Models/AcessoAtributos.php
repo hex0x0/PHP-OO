@@ -1,7 +1,9 @@
 <?php
 
-
+    namespace Lucas\Comercial\Models;
     trait AcessoAtributos
+
+    //namespace user\firm\Models
     {
         //Métodos que vc quer compartilhar entre as classes
 

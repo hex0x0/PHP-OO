@@ -3,6 +3,8 @@
     //palavra reservada class
     //atributos e comportamentos
 
+    namespace Lucas\Comercial\Models;
+
     abstract class Pessoa
     {
 
