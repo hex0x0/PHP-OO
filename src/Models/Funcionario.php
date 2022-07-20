@@ -3,7 +3,7 @@
 
    namespace Lucas\Comercial\Models;
 
-   require_once('Autenticar.php');
+   require_once('autoload.php');
 
    class Funcionario extends Pessoa implements Autenticar
    {

@@ -1,7 +1,7 @@
 <?php
 
     namespace Lucas\Comercial\Models;
-    require_once 'AcessoAtributos.php';
+    require_once 'autoload.php';
 
 
     class Endereco
