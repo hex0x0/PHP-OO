@@ -3,15 +3,18 @@
     //palavra reservada class
     //atributos e comportamentos
 
-    class Pessoa
+    abstract class Pessoa
     {
 
         // public string $nome;
         // public int $idade;
 
-        private string $nome;
-        private int $idade;
-        private Endereco $endereco;
+        protected string $nome;
+        protected int $idade;
+        protected Endereco $endereco;
+        //protected - compartilhado entre as classes filhas
+
+        protected float $desconto;
         private static $qtde_pessoas;
 
         //Método construtor -> usado automaticamente quando instaciamos um objeto
@@ -23,6 +26,7 @@
             $this->nome = $nome;
             $this->idade =$idade;
             $this->endereco = $endereco;
+            $this->setDesconto();   //define o desconto 
             $this->validaIdade($idade);
 
             //:: faz referência a um atributo estático
@@ -84,4 +88,12 @@
         }
 
 
+        protected abstract function setDesconto():void;
+
+        public function getDesconto()
+        {
+            return $this->desconto;
+        }
+
+        public abstract function __toString():string;
     }
