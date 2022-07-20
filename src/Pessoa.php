@@ -11,16 +11,18 @@
 
         private string $nome;
         private int $idade;
+        private Endereco $endereco;
         private static $qtde_pessoas;
 
         //Método construtor -> usado automaticamente quando instaciamos um objeto
 
         //visibilidade e encapsulamento
 
-        public function __construct(string $nome, int $idade)
+        public function __construct(string $nome, int $idade, Endereco $endereco)
         {   
             $this->nome = $nome;
             $this->idade =$idade;
+            $this->endereco = $endereco;
             $this->validaIdade($idade);
 
             //:: faz referência a um atributo estático
