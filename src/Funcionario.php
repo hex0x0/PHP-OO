@@ -1,9 +1,13 @@
 <?php
 
-   class Funcionario extends Pessoa
+
+   require_once('Autenticar.php');
+
+   class Funcionario extends Pessoa implements Autenticar
    {
         private string $cargo;
         private float $salario;
+        private string $senha;
         public function __construct(string $nome, int $idade, Endereco $endereco, string $cargo, float $salario)
         {
             //Pessoa tem atributos e métodos atrelados a ela
@@ -41,4 +45,20 @@
         {
             return "<p>" . $this->nome . "</p>";
         }
+
+
+        public function login(string $nome, string $senha):void
+        {
+            if($this->nome === $nome && $this->senha === $senha)
+            {
+                echo "<p>[Login autorizado]</p>";
+            }else{
+                echo "<p>[Usuário não autenticado]</p>";
+            }
+        }
+
+        public function setSenha(string $senha){
+            $this->senha = $senha;
+        }
+
    }
