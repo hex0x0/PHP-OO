@@ -4,6 +4,7 @@
     //atributos e comportamentos
 
     namespace Lucas\Comercial\Models;
+    require_once 'autoload.php';
 
     abstract class Pessoa
     {
