@@ -1,7 +1,7 @@
 <?php
 
 
-    namespace Lucas\Comercial\Models;
+    namespace Lucas\Comercial\Dominio\Models;
     require_once 'autoload.php';
     class Produto
     {

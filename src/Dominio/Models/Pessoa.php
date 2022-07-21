@@ -3,7 +3,7 @@
     //palavra reservada class
     //atributos e comportamentos
 
-    namespace Lucas\Comercial\Models;
+    namespace Lucas\Comercial\Dominio\Models;
 
     use DateTimeInterface;
 
@@ -15,10 +15,11 @@
         // public string $nome;
         // public int $idade;
 
+        protected ?int $id;
         protected string $nome;
         //protected int $idade;
         protected DateTimeInterface $dataNascimento;
-        protected Endereco $endereco;
+        protected Endereco $endereco; //Exemplo de associação (agregação) -> pessoa tem um endereço
         //protected - compartilhado entre as classes filhas
 
         protected float $desconto;
@@ -28,8 +29,9 @@
 
         //visibilidade e encapsulamento
 
-        public function __construct(string $nome, DateTimeInterface $dataNascimento, Endereco $endereco)
+        public function __construct(?int $id, string $nome, DateTimeInterface $dataNascimento, Endereco $endereco)
         {   
+            $this->id = $id;
             $this->nome = $nome;
             $this->dataNascimento =$dataNascimento;
             $this->endereco = $endereco;

@@ -3,7 +3,7 @@
     namespace Lucas\Comercial\Infraestrutura\Repositorio;
 
 
-    use Lucas\Comercial\Models\Produto;
+    use Lucas\Comercial\Dominio\Models\Produto;
     use Lucas\Comercial\Dominio\Repositorio\RepositorioProdutos;
     use Lucas\Comercial\Infraestrutura\Persistencia;
     use PDO;

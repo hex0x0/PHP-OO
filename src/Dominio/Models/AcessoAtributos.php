@@ -1,6 +1,6 @@
 <?php
 
-    namespace Lucas\Comercial\Models;
+    namespace Lucas\Comercial\Dominio\Models;
     trait AcessoAtributos
 
     //namespace user\firm\Models

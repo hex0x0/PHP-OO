@@ -1,6 +1,6 @@
 <?php
 
-    namespace Lucas\Comercial\Models;
+    namespace Lucas\Comercial\Dominio\Models;
 
     use DateTimeInterface;
 
@@ -8,11 +8,13 @@
     {
 
         //private string $dataNascimento;
+        
+        protected ?int $id;
         private float $renda;
 
-        public function __construct(string $nome, DateTimeInterface $dataNascimento, Endereco $endereco, float $renda)
+        public function __construct(?int $id, string $nome, DateTimeInterface $dataNascimento, Endereco $endereco, float $renda)
         {
-            parent::__construct($nome, $dataNascimento, $endereco);
+            parent::__construct($id, $nome, $dataNascimento, $endereco);
             //$this->dataNascimento = $dataNascimento;
             $this->renda = $renda;            
         }

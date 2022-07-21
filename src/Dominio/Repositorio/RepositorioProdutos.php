@@ -3,7 +3,7 @@
 
     namespace Lucas\Comercial\Dominio\Repositorio;
 
-    use Lucas\Comercial\Models\Produto;
+    use Lucas\Comercial\Dominio\Models\Produto;
 
     interface RepositorioProdutos
     {

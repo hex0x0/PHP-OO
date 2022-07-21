@@ -1,21 +1,21 @@
 <?php
 
 
-   namespace Lucas\Comercial\Models;
-
+    namespace Lucas\Comercial\Dominio\Models;
     use DateTimeInterface;
 
    require_once('autoload.php');
 
    class Funcionario extends Pessoa implements Autenticar
    {
+        protected ?int $id;
         private string $cargo;
         private float $salario;
         private string $senha;
-        public function __construct(string $nome, DateTimeInterface $dataNascimento, Endereco $endereco, string $cargo, float $salario)
+        public function __construct(?int $id, string $nome, DateTimeInterface $dataNascimento, Endereco $endereco, string $cargo, float $salario)
         {
             //Pessoa tem atributos e métodos atrelados a ela
-            parent::__construct($nome, $dataNascimento, $endereco);
+            parent::__construct($id, $nome, $dataNascimento, $endereco);
             $this->cargo = $cargo;
             $this->salario = $salario;    
         }
@@ -47,7 +47,8 @@
 
         public function __toString(): string
         {
-            return "<p>" . $this->nome . "</p>";
+            return "<br>Data de nascimento:" . $this->getDataNascimento()->format('d/m/Y') . 
+            "<br>Nome:" . $this->nome . "<br> End: " . $this->endereco->getNomeLogradouro() . "<br>";
         }
 
 

@@ -11,11 +11,11 @@
     require_once 'autoload.php';
 
     use Lucas\Comercial\Infraestrutura\Persistencia\CriadorConexao;
-    use Lucas\Comercial\Models\Pessoa;
-    use Lucas\Comercial\Models\Endereco;
-    use Lucas\Comercial\Models\Funcionario;
-    use Lucas\Comercial\Models\Cliente;
-    use Lucas\Comercial\Models\Produto;
+    use Lucas\Comercial\Dominio\Models\Pessoa;
+    use Lucas\Comercial\Dominio\Models\Endereco;
+    use Lucas\Comercial\Dominio\Models\Funcionario;
+    use Lucas\Comercial\Dominio\Models\Cliente;
+    use Lucas\Comercial\Dominio\Models\Produto;
     use Lucas\Comercial\Dominio\Repositorio\RepositorioProdutos;
     use Lucas\Comercial\Infraestrutura\Repositorio\PdoRepositorioProduto;
 
@@ -93,11 +93,18 @@
     $produto3 = new Produto(NULL, 'Café', 22);
 
     
-    $repositorio->salvar($produto1);
+    //$repositorio->salvar($produto1);
     // $repositorio->salvar($produto2);
     // $repositorio->salvar($produto3);
 
-    $repositorio->todosProdutos();
+    //$repositorio->todosProdutos();
+
+    
+    //DateTimeImmutable(y/m/d) -> padrão ano, mês e dia
+    //Aqui seguimos o padrão entity em que as classes representam tabelas no banco
+    $funca = new Funcionario(NULL, 'lucas', new DateTimeImmutable('1995/02/25'), $Endereco1, 'AUX.ALMOXARIFE', 1.200);
+
+    echo $funca;
 
 
 
