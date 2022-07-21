@@ -4,6 +4,9 @@
     //atributos e comportamentos
 
     namespace Lucas\Comercial\Models;
+
+    use DateTimeInterface;
+
     require_once 'autoload.php';
 
     abstract class Pessoa
@@ -13,7 +16,8 @@
         // public int $idade;
 
         protected string $nome;
-        protected int $idade;
+        //protected int $idade;
+        protected DateTimeInterface $dataNascimento;
         protected Endereco $endereco;
         //protected - compartilhado entre as classes filhas
 
@@ -24,13 +28,13 @@
 
         //visibilidade e encapsulamento
 
-        public function __construct(string $nome, int $idade, Endereco $endereco)
+        public function __construct(string $nome, DateTimeInterface $dataNascimento, Endereco $endereco)
         {   
             $this->nome = $nome;
-            $this->idade =$idade;
+            $this->dataNascimento =$dataNascimento;
             $this->endereco = $endereco;
             $this->setDesconto();   //define o desconto 
-            $this->validaIdade($idade);
+            //$this->validaIdade($idade);
 
             //:: faz referência a um atributo estático
             //Nome da minha classe:: 
@@ -64,13 +68,13 @@
             $this->nome = $nome;
         }
 
-        public function getIdade(){
-            return $this->idade;
+        public function getDataNascimento():DateTimeInterface{
+            return $this->dataNascimento;
         }
 
-        public function setIdade(int $idade)
+        public function setDataNascimento(DateTimeInterface $dataNascimento)
         {
-            $this->idade = $idade;
+            $this->dataNascimento = $dataNascimento;
         }
 
         public static function getNumDePessoas()
@@ -88,6 +92,11 @@
                 echo 'Idade invalida';
                 exit;
             }
+        }
+
+        public function idade()
+        {
+            return $this->dataNascimento->diff(new \DateTimeImmutable())->y;
         }
 
 

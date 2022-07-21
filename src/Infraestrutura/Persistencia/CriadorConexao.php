@@ -1,7 +1,7 @@
 <?php
 
 
-    namespace Lucas\Comercial\infraestrutura\persistencia;
+    namespace Lucas\Comercial\Infraestrutura\Persistencia;
 
     use PDO;
     use PDOException;
@@ -13,7 +13,7 @@
         {
             try
             {
-                $pdo = new PDO('mysql:host=127.0.0.1;dbname=bd_comercial', 'root', 'admin123');
+                $pdo = new PDO('mysql::host=localhost;dbname=bd_comercial', 'root', 'admin123');
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 return $pdo;
             }catch(PDOException $excecao)

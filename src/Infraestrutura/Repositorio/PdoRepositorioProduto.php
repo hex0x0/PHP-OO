@@ -31,7 +31,7 @@
 
         public function salvar(Produto $produto): bool
         {
-            if($produto->getIdProduto() === null){
+            if($produto->getIdProduto() === NULL){
                 return $this->criarProduto($produto);
             }
 
@@ -40,14 +40,17 @@
 
         public function criarProduto(Produto $produto): bool
         {
-            $sql = "INSERT INTO (nomeProduto, preco) VALUES (:nomeProduto, :preco)";
-
+            $sql = "INSERT INTO (nomeProduto, preco) VALUES (:nome, :preco);";
+            //Prepare usado para evitar injeção de sql
             $stmt = $this->conexao->prepare($sql);
-
-            $stmt->bindValue(':nomeProduto', $produto->getNomeProduto(), PDO::PARAM_STR);
-            $stmt->bindValue(':preco', $produto->getPreco(), PDO::PARAM_STR);
+            //execute considera todos os valores passados como PARAM_STR
+            $stmt->bindValue(':nome', $produto->getNomeProduto());
+            $stmt->bindValue(':preco', $produto->getPreco());
 
             $sucesso = $stmt->execute();
+            if($sucesso){
+                $produto->setIdProduto($this->conexao->lastInsertId());
+            }
 
             return $sucesso;
         }
