@@ -17,7 +17,8 @@
     use Lucas\Comercial\Dominio\Models\Cliente;
     use Lucas\Comercial\Dominio\Models\Produto;
     use Lucas\Comercial\Dominio\Repositorio\RepositorioProdutos;
-    use Lucas\Comercial\Infraestrutura\Repositorio\PdoRepositorioProduto;
+use Lucas\Comercial\Infraestrutura\Repositorio\PdoRepositorioClientes;
+use Lucas\Comercial\Infraestrutura\Repositorio\PdoRepositorioProduto;
 
     $Endereco1 = new Endereco('DF', 'Brasília', 'Estrutural', '05', 'Quadra 05 conj. 19', '71256245');
 
@@ -54,7 +55,7 @@
 
     //Você não pode instaciar novos objetos a partir de uma classe abstrata
     //Uma classe genérica é criada e nela atributos comuns a outras classes são criados
-    //Polimorfisco - Classes do tipo Pessoa (Cliente e Funcionário) implementam os mesmos métodos abstratos mas gerando
+    //Polimorfismo - Classes do tipo Pessoa (Cliente e Funcionário) implementam os mesmos métodos abstratos mas gerando
     //comportamentos distintos
     //Sobrecarga -> declaração do mesmo métdo mudando apenas o número de parâmetros (assinatura)
 
@@ -102,10 +103,14 @@
     
     //DateTimeImmutable(y/m/d) -> padrão ano, mês e dia
     //Aqui seguimos o padrão entity em que as classes representam tabelas no banco
-    $funca = new Funcionario(NULL, 'lucas', new DateTimeImmutable('1995/02/25'), $Endereco1, 'AUX.ALMOXARIFE', 1.200);
+    // $funca = new Funcionario(NULL, 'lucas', new DateTimeImmutable('1995/02/25'), $Endereco1, 'AUX.ALMOXARIFE', 1.200);
 
-    echo $funca;
+    // echo $funca;
 
+
+    $cliente_teste = new PdoRepositorioClientes(CriadorConexao::criarConexao());
+
+    var_dump($cliente_teste->todosClientes());
 
 
 
