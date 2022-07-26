@@ -60,12 +60,12 @@
 
         //Métodos acessores dão acesso aos dados
 
-        public function getId():int
+        public function getId():?int
         {
             return $this->id;
         }
 
-        public function setId(?int $id):void
+        public function setId(int $id):void
         {
             $this->id = $id;
         }
@@ -88,6 +88,16 @@
         public function setDataNascimento(DateTimeInterface $dataNascimento)
         {
             $this->dataNascimento = $dataNascimento;
+        }
+
+        public function getEndereco():Endereco
+        {
+            return $this->endereco;
+        }
+
+        public function setEndereco(Endereco $endereco):void
+        {
+            $this->endereco = $endereco;
         }
 
         public static function getNumDePessoas()

@@ -3,9 +3,10 @@
 
     namespace Lucas\Comercial\Infraestrutura\Repositorio;
 
-
-    use Lucas\Comercial\Dominio\Models\Cliente;
-    use Lucas\Comercial\Dominio\Repositorio\RepositorioClientes;
+use DateTimeImmutable;
+use Lucas\Comercial\Dominio\Models\Cliente;
+use Lucas\Comercial\Dominio\Models\Endereco;
+use Lucas\Comercial\Dominio\Repositorio\RepositorioClientes;
     use PDO;
 use PDOStatement;
 
@@ -29,6 +30,46 @@ use PDOStatement;
             //return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $this->hidratarCliente($stmt);
+        }
+
+        public function todosClientesComEndereco():array
+        {
+            $sql_consulta = "SELECT * FROM cliente JOIN endereco ON id  = idCliente";
+            $stmt = $this->conexao->query($sql_consulta);
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $lista_cliente = [];
+
+
+            foreach($resultado as $linha){
+                if(!array_key_exists($linha['id'], $lista_cliente)){
+                    $lista_cliente[$linha['id']] = new Cliente(
+
+
+                        $linha['id'],
+                        $linha['nome'],
+                        new DateTimeImmutable($linha['dataNascimento']),
+                        new Endereco(NULL, "", "", "", "", "", "", NULL),
+                        $linha['renda']
+                    );
+                }
+
+                $endereco = new Endereco(
+
+                    $linha['idendereco'],
+                    $linha['uf'],
+                    $linha['cidade'],
+                    $linha['nomeLogradouro'],
+                    $linha['numero'],
+                    $linha['bairro'],
+                    $linha['cep'],
+                    $linha['idCliente']);
+
+                    $lista_cliente[$linha['id']]->setEndereco($endereco);
+            }
+
+
+            return $lista_cliente;
         }
 
 
@@ -100,6 +141,34 @@ use PDOStatement;
             return $stmt->execute();
         }
 
+        public function preencheEndereco(Cliente $cliente)
+        {
+            $sql = "SELECT * FROM endereco WHERE idendereco = ?";
+
+            $stmt = $this->conexao->prepare($sql);
+
+            $stmt->bindValue(1, $cliente->getId(), PDO::PARAM_INT);
+            
+
+            $stmt->execute();
+
+
+            $lista_enderecos = $stmt->fetchAll();
+
+            foreach($lista_enderecos as $endereco){
+                $endereco = new Endereco(
+                    $endereco['idendereco'],
+                    $endereco['uf'],
+                    $endereco['cidade'],
+                    $endereco['nomeLogradouro'],
+                    $endereco['numero'],
+                    $endereco['bairro'],
+                    $endereco['cep'],
+                    $endereco['idCliente']
+                );
+            }
+        }
+
 
         public function hidratarCliente(PDOStatement $stmt):array
         {
@@ -108,39 +177,43 @@ use PDOStatement;
 
             $array_clientes = [];
             
-            echo "<table>";
+            // echo "<table>";
             foreach($clientes as $cli){
 
-                $array_clientes = new Cliente(
+                $cliente = new Cliente(
                     
 
                     $cli['id'],
                     $cli['nome'],
-                    $cli['dataNascimento'],
-                    $cli['idEndereco'],
+                    new DateTimeImmutable($cli['dataNascimento']),
+                    new Endereco(NULL, "", "", "", "", "", "", NULL),
                     $cli['renda']
 
 
                 );
+
+
+                $this->preencheEndereco($cliente);
                 
-                echo "
+                // echo "
                 
-                    <tr>
-                        <td width='20'>
-                            {$cli['id']}
-                        <td>
-                        <td width='150'>
-                            {$cli['nome']}
-                        </td>
-                        <td align='right'>
-                            {$cli['renda']}
-                        </td>
-                    </tr>
+                //     <tr>
+                //         <td width='20'>
+                //             {$cli['id']}
+                //         <td>
+                //         <td width='150'>
+                //             {$cli['nome']}
+                //         </td>
+                //         <td align='right'>
+                //             {$cli['renda']}
+                //         </td>
+                //     </tr>
 
                 
                 
-                ";
+                // ";
                 
+                $array_clientes[] = $cliente;
 
 
 

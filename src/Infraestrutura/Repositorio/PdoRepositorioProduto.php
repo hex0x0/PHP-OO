@@ -29,6 +29,8 @@
             return $this->hidratarListaProdutos($stmt);
         }
 
+        
+
         public function salvar(Produto $produto): bool
         {
             if($produto->getIdProduto() === NULL){

@@ -17,10 +17,11 @@
     use Lucas\Comercial\Dominio\Models\Cliente;
     use Lucas\Comercial\Dominio\Models\Produto;
     use Lucas\Comercial\Dominio\Repositorio\RepositorioProdutos;
-use Lucas\Comercial\Infraestrutura\Repositorio\PdoRepositorioClientes;
-use Lucas\Comercial\Infraestrutura\Repositorio\PdoRepositorioProduto;
+    use Lucas\Comercial\Infraestrutura\Repositorio\PdoRepositorioClientes;
+    use Lucas\Comercial\Infraestrutura\Repositorio\PdoRepositorioProduto;
+    //use DateTimeImmutable;
 
-    $Endereco1 = new Endereco('DF', 'Brasília', 'Estrutural', '05', 'Quadra 05 conj. 19', '71256245');
+    $Endereco1 = new Endereco(NULL, 'DF', 'Brasília', 'Estrutural', '05', 'Quadra 05 conj. 19', '71256245', NULL);
 
     // $Pessoa1 = new Pessoa('Pedro', 14, $Endereco1);
     // $Pessoa2 = new Pessoa('Ana', 15, $Endereco1);
@@ -110,7 +111,15 @@ use Lucas\Comercial\Infraestrutura\Repositorio\PdoRepositorioProduto;
 
     $cliente_teste = new PdoRepositorioClientes(CriadorConexao::criarConexao());
 
-    var_dump($cliente_teste->todosClientes());
+   
+    $cliente1 = new Cliente(NULL, 'lucas', new DateTimeImmutable('2022-07-22'), $Endereco1, 4500);
+
+
+
+    $cliente_teste->salvar($cliente1);
+
+
+    $cliente_teste->todosClientes();
 
 
 
