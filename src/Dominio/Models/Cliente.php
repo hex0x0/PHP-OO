@@ -45,7 +45,8 @@
 
         public function __toString()
         {
-            return "<p>" . $this->nome . "</p>";
+            return "<p>" . $this->nome . "</p>" . "<p>" . $this->renda . "</p>";
+
         }
 
     }

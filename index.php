@@ -119,9 +119,11 @@
     $cliente_teste->salvar($cliente1);
 
 
-    $cliente_teste->todosClientes();
+    $resultado = $cliente_teste->todosClientes();
 
-
+    foreach($resultado as $linha){
+        echo $linha;
+    }
 
 
     

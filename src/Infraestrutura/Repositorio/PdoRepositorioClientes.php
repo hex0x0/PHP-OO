@@ -3,12 +3,12 @@
 
     namespace Lucas\Comercial\Infraestrutura\Repositorio;
 
-use DateTimeImmutable;
-use Lucas\Comercial\Dominio\Models\Cliente;
-use Lucas\Comercial\Dominio\Models\Endereco;
-use Lucas\Comercial\Dominio\Repositorio\RepositorioClientes;
+    use DateTimeImmutable;
+    use Lucas\Comercial\Dominio\Models\Cliente;
+    use Lucas\Comercial\Dominio\Models\Endereco;
+    use Lucas\Comercial\Dominio\Repositorio\RepositorioClientes;
     use PDO;
-use PDOStatement;
+    use PDOStatement;
 
     class PdoRepositorioClientes implements RepositorioClientes
     {
@@ -95,6 +95,9 @@ use PDOStatement;
 
             if($sucesso){
                 $cliente->setId($this->conexao->lastInsertId());
+                //Aqui vai a função para criação do endereço
+
+                //$this->criaEndereco($cliente->getEndereco(), $cliente);
 
             }
 
